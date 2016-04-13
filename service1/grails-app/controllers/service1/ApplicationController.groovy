@@ -12,4 +12,12 @@ class ApplicationController implements PluginManagerAware {
     def index() {
         [grailsApplication: grailsApplication, pluginManager: pluginManager]
     }
+
+    def traditionalList() {
+
+    }
+
+    def reactiveList() {
+
+    }
 }
