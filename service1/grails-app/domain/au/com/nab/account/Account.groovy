@@ -6,6 +6,6 @@ class Account {
     BigDecimal balance
 
     def deposit(BigDecimal amount) {
-        balance =+ amount
+        balance = +amount
     }
 }
