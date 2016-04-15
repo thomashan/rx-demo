@@ -1,2 +1,3 @@
 build/
-service2.iml
+.gradle/
+service1.iml
