@@ -45,7 +45,8 @@
             <h1>Basic Intro to Reactive Programming and Reactive Extensions (RX)</h1>
             <h3>(not so basic also included)</h3>
             <p>
-                <small>Created by Thomas Han - 12/04/2016 (some links might be out of date by the time you read this)
+                <small>Thomas Han - Lead Software Engineer @ Odecee (some links might be out of date by the time you
+                    read this)
                 </small>
             </p>
         </section>
@@ -149,10 +150,18 @@
                     <li>C++: <a href="https://github.com/Reactive-Extensions/RxCpp" target="_blank">RxCpp</a></li>
                     <li>Ruby: <a href="https://github.com/Reactive-Extensions/Rx.rb" target="_blank">Rx.rb</a></li>
                     <li>Python: <a href="https://github.com/ReactiveX/RxPY" target="_blank">RxPY</a></li>
-                    <li>JRuby: <a href="https://github.com/ReactiveX/RxJRuby target=" _blank"">RxJRuby</a></li>
+                    <li>JRuby: <a href="https://github.com/ReactiveX/RxJRuby" target="_blank">RxJRuby</a></li>
                     <li>Kotlin: <a href="https://github.com/ReactiveX/RxKotlin" target="_blank">RxKotlin</a></li>
                     <li>Swift: <a href="https://github.com/kzaher/RxSwift" target="_blank">RxSwift</a></li>
                 </ul>
+            </section>
+            <section>
+                <h2>What is reactive, reactive programming, RX recapped</h2>
+                <p>Reactive: mindset that follows the reactive manifesto</p>
+                <p>Reactive Programming: programming paradigm that works with streams of data</p>
+                <p>RX: library that works with observables (streams of data)</p>
+                <p>Other libraries which implements reactive programming are Akka actor and Akka stream not part of the
+                    RX family.</p>
             </section>
         </section>
 
@@ -171,13 +180,53 @@
             <section>
                 <h2>Reactive microservice</h2>
                 <p>Reactive manifesto v1.1 states:</p>
-                <blockquote cite="http://www.reactivemanifesto.org/pdf/the-reactive-manifesto.pdf">&ldquo;An application
+                <blockquote class="fragment"
+                            cite="http://www.reactivemanifesto.org/pdf/the-reactive-manifesto.pdf">&ldquo;An application
                     must be reactive from top to bottom.&rdquo;</blockquote>
             </section>
         </section>
         <section>
             <section>
                 <h2>Service engines - NAB's journey</h2>
+                <p class="fragment">Service Engine &ne; Reactive Microservice</p>
+                <span class="fragment">
+                    <p>Service Engine &cong; Microservice</p>
+                    <p>Service Engine at NAB is most likely to be an architect's interpretation of microservice.</p>
+                </span>
+            </section>
+            <section>
+                <h2>Let's make Service Engines more reactive</h2>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h2>Add more resilience</h2>
+            </section>
+            <section data-background="images/resilence-all.png" data-background-size="1300px">
+            </section>
+            <section>
+                <h2>1% chance of any node going down independently</h2>
+            </section>
+            <section data-background="images/resilence-outage.png" data-background-size="1300px">
+                <h2>99%</h2>
+            </section>
+            <se
+                <p>The probability of six endpoints going down is 1%</p>
+                <p class="fragment">Or the uptime will be 99%</p>
+                <p class="fragment">Now lets divide the end points so they fail independently</p>
+            </section>
+            <section data-background="images/resilence-outage-independent.png" data-background-size="1300px">
+                <h2>99.99%</h2>
+            </section>
+            <section>
+                <p>The probability of six endpoints going down is 0.01%</p>
+                <p class="fragment">Or the uptime will be 99.99%</p>
+            </section>
+            <section>
+                <p>We've gained more resiliency by setting the services up so they fail independently.</p>
+                <p class="fragment">I hear you say: "But that's way harder to maintain" - bullocks!</p>
+                <p class="fragment">The initial cost maybe higher but maintenance cost will far outweigh the initial costs.</p>
+                <p>Netflix</p>
             </section>
         </section>
 
@@ -186,8 +235,10 @@
             <ul>
                 <li>Difference between ESB</li>
                 <li>Architecture is more important than any framework</li>
+                <li>Microservice is not HTTP endpoint. HTTP over TCP is just a transportation layer.</li>
                 <li>My interpretation of microservice</li>
                 <li>Resilience using a publish/consume message bus.</li>
+                <li>Resilience using finer grained microservices</li>
                 <li>Very few are doing right</li>
                 <li>Do we know how to do this? Hell yeah, but only in parts.</li>
             </ul>
