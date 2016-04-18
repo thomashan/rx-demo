@@ -1,23 +1,14 @@
 package service1
 
 import grails.core.GrailsApplication
-import grails.util.Environment
-import grails.plugins.*
+import grails.plugins.GrailsPluginManager
+import grails.plugins.PluginManagerAware
 
 class ApplicationController implements PluginManagerAware {
-
     GrailsApplication grailsApplication
     GrailsPluginManager pluginManager
 
     def index() {
         [grailsApplication: grailsApplication, pluginManager: pluginManager]
-    }
-
-    def traditionalList() {
-
-    }
-
-    def reactiveList() {
-
     }
 }

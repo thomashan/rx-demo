@@ -1,1 +1,3 @@
-service2.iml
+build/
+.gradle/
+*.iml

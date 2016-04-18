@@ -2,6 +2,10 @@ package au.com.nab.account
 
 class Account {
     String name
-    // TODO: elaborate the on the domain model
-    String version
+    String accountNumber
+    BigDecimal balance
+
+    def deposit(BigDecimal amount) {
+        balance = +amount
+    }
 }
