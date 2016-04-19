@@ -5,11 +5,11 @@ import rx.Observable
 
 @Transactional
 class AccountService {
-    List<Account> getAccounts() {
-
+    List<Account> traditionalGetAccounts() {
+        Account.findAll()
     }
 
-    Observable<Account> accounts() {
-
+    Observable<Account> observableGetAccounts() {
+        Observable.from(Account.findAll())
     }
 }
