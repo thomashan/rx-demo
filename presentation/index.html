@@ -210,7 +210,7 @@
             <section data-background="images/resilence-outage.png" data-background-size="1300px">
                 <h2>99%</h2>
             </section>
-            <se
+            <section>
                 <p>The probability of six endpoints going down is 1%</p>
                 <p class="fragment">Or the uptime will be 99%</p>
                 <p class="fragment">Now lets divide the end points so they fail independently</p>
@@ -224,12 +224,36 @@
             </section>
             <section>
                 <p>We've gained more resiliency by setting the services up so they fail independently.</p>
-                <p class="fragment">I hear you say: "But that's way harder to maintain" - bullocks!</p>
-                <p class="fragment">The initial cost maybe higher but maintenance cost will far outweigh the initial costs.</p>
-                <p>Netflix</p>
+                <p class="fragment">The initial cost maybe higher but maintenance cost will far outweigh the initial
+                    costs.</p>
+            </section>
+            <section>
+                <p>I hear you say: "But that's way harder to maintain"</p>
+                <p class="fragment">High availability vs maintenance</p>
+                <p class="fragment">Another perspective</p>
+                <span class="fragment">
+                    <p>Customer's won't be able to perform actions like listing accounts, making payments, etc</p>
+                    <p>vs</p>
+                    <p>Making it harder for devops to maintain</p>
+                </span>
             </section>
         </section>
-
+        <section>
+            <section>
+                <h2>Very few companies are doing (reactive microservices) it right.</h2>
+                <p class="fragment">Can you guess which ones?</p>
+                <p class="fragment">Netflix</p>
+            </section>
+            <section>
+                <h2>The things NAB can improve on</h2>
+                <p class="fragment">Get rid of ESB. The message queues should be dumb e.g. no logic for routing. The
+                    smarts should be in the microservices.</p>
+                <p class="fragment">Get rid of the mindset that Services = APIs. HTTP(s) over TCP is just a
+                    transportation protocols. Services do not have to exposed through HTTP(s) all the time. (more on
+                    this in the demo)</p>
+                <p class="fragment"><span style="color: red">*</span> Use resilient message buses (more on this in the demo)</p>
+            </section>
+        </section>
 
         <section>
             <ul>
@@ -238,8 +262,6 @@
                 <li>Microservice is not HTTP endpoint. HTTP over TCP is just a transportation layer.</li>
                 <li>My interpretation of microservice</li>
                 <li>Resilience using a publish/consume message bus.</li>
-                <li>Resilience using finer grained microservices</li>
-                <li>Very few are doing right</li>
                 <li>Do we know how to do this? Hell yeah, but only in parts.</li>
             </ul>
         </section>
