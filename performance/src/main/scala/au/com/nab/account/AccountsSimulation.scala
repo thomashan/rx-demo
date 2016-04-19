@@ -1,5 +1,6 @@
 package au.com.nab.account
 
+import au.com.nab.account.HttpParameters.ACCEPT_HEADER
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 
@@ -7,7 +8,7 @@ import io.gatling.http.Predef._
 class AccountsSimulation extends Simulation {
   val httpConfiguration = http
     .baseURL("http://localhost:8080")
-    .acceptHeader(HttpParameters.ACCEPT_HEADER)
+    .acceptHeader(ACCEPT_HEADER)
 
   val traditionalListScenario = scenario("AccountsList")
     .exec(http("traditionalList")
