@@ -128,12 +128,12 @@
                 <p>It turns out many companies working on different domains were independently discovering patterns for
                     building software that look the same. Reactive!</p>
                 <p>Reactive programming provides a higher abstraction than imperative or declarative programming,
-                    ultimately increasing productivity in domains where RX exceled at.</p>
+                    ultimately increasing productivity by magnitudes in domains where RX exceled at.</p>
                 <p>Analogy: productivity gained by employing java over assembly as a general programming language.</p>
             </section>
             <section>
                 <h2>Why reactive?</h2>
-                <p>The reactive extensions (RX) originally developed by Microsoft started all.</p>
+                <p>The reactive extensions (RX) originally developed by Microsoft.</p>
                 <p>Application using RX showed the properties outlined in reactive manifesto.</p>
                 <p><a href="http://reactivex.io/" target="_blank">RX has been ported to many different languages</a></p>
             </section>
@@ -211,19 +211,19 @@
                 <h2>99%</h2>
             </section>
             <section>
-                <p>The probability of six endpoints going down is 1%</p>
+                <p>The probability of six endpoints going down is 1% = (0.01)</p>
                 <p class="fragment">Or the uptime will be 99%</p>
                 <p class="fragment">Now lets divide the end points so they fail independently</p>
             </section>
             <section data-background="images/resilence-outage-independent.png" data-background-size="1300px">
-                <h2>99.99%</h2>
+                <h2>99.9999%</h2>
             </section>
             <section>
-                <p>The probability of six endpoints going down is 0.01%</p>
-                <p class="fragment">Or the uptime will be 99.99%</p>
+                <p>The probability of six endpoints going down is 0.0001% = (0.01 * 0.01 * 0.01)</p>
+                <p class="fragment">Or the uptime will be 99.9999%</p>
             </section>
             <section>
-                <p>We've gained more resiliency by setting the services up so they fail independently.</p>
+                <p>We've put resiliency by setting up the services so they fail independently.</p>
                 <p class="fragment">The initial cost maybe higher but maintenance cost will far outweigh the initial
                     costs.</p>
             </section>
