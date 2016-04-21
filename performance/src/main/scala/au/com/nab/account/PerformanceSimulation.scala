@@ -9,7 +9,7 @@ import io.gatling.http.Predef._
 import scala.concurrent.duration._
 
 class ReactiveListSimulation extends Simulation {
-  val reactiveListScenario = scenario("AccountsList")
+  val reactiveListScenario = scenario("Traditional account list")
     .exec(http("reactiveList")
       .get("/accounts/reactiveList")
       .check(status.is(200))
@@ -22,7 +22,7 @@ class ReactiveListSimulation extends Simulation {
 }
 
 class TraditionalListSimulation extends Simulation {
-  val traditionalListScenario = scenario("AccountsList")
+  val traditionalListScenario = scenario("Reactive account list")
     .exec(http("traditionalList")
       .get("/accounts/traditionalList")
       .check(status.is(200))
