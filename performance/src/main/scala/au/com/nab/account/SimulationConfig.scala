@@ -6,5 +6,5 @@ object SimulationConfig {
   private val config = ConfigFactory.load()
   val baseUrl = config.getString("performance.baseUrl")
   val users = config.getInt("performance.users")
-  val rampDuration = config.getInt("performance.ramp")
+  val ramp = config.getInt("performance.ramp")
 }
