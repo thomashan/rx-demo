@@ -1,7 +1,7 @@
 package au.com.nab.account
 
 import au.com.nab.account.HttpConfig.HTTP_CONF
-import au.com.nab.account.SimulationConfig.{ramp, users}
+import au.com.nab.account.SimulationConfig.{duration, users}
 import io.gatling.core.Predef._
 import io.gatling.core.scenario.Simulation
 import io.gatling.http.Predef._
@@ -17,7 +17,7 @@ class ReactiveListSimulation extends Simulation {
 
   setUp(
     reactiveListScenario
-      .inject(rampUsers(users) over (ramp minutes))
+      .inject(constantUsersPerSec(users) during (duration minutes))
   ).protocols(HTTP_CONF)
 }
 
@@ -30,6 +30,6 @@ class TraditionalListSimulation extends Simulation {
 
   setUp(
     traditionalListScenario
-      .inject(rampUsers(users) over (ramp minutes))
+      .inject(constantUsersPerSec(users) during (duration minutes))
   ).protocols(HTTP_CONF)
 }
