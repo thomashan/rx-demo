@@ -8,23 +8,6 @@ import io.gatling.http.Predef._
 
 import scala.concurrent.duration._
 
-class ConstantLoadSimulation extends Simulation {
-  val reactiveListScenario = scenario("Constant load - account list")
-    .exec(http("reactive")
-      .get("/accounts/reactiveList")
-      .check(status.is(200))
-    )
-    .exec(http("traditional")
-      .get("/accounts/traditionalList")
-      .check(status.is(200))
-    )
-
-  setUp(
-    reactiveListScenario
-      .inject(constantUsersPerSec(users) during (duration minutes))
-  ).protocols(HTTP_CONF)
-}
-
 class ReactiveListSimulation extends Simulation {
   val reactiveListScenario = scenario("Reactive account list - constant load")
     .exec(http("reactiveList")
