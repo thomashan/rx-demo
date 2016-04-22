@@ -60,6 +60,7 @@ dependencies {
     compile "org.hibernate:hibernate-ehcache"
     compile "org.grails.plugins:views-json"
     compile "io.reactivex:rxgroovy:1.0.3"
+    compile "org.apache.kafka:kafka_2.11:0.9.0.1"
 
     console "org.grails:grails-console"
 
