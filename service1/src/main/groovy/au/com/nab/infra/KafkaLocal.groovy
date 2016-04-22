@@ -31,14 +31,14 @@ class KafkaLocal {
         Properties kafkaProperties = new Properties()
         kafkaProperties.put("zookeeper.connect", "localhost:2181")
         kafkaProperties.put("broker.id", "1")
-        kafkaProperties.put("log.dirs", "${TMP_DIR}/kafka-local")
+        kafkaProperties.put("log.dirs", "${TMP_DIR}/kafka-local/${UUID.randomUUID().toString()}".toString())
 
         return kafkaProperties
     }
 
     private static Properties defaultZookeeperProperties() {
         Properties zkProperties = new Properties()
-        zkProperties.put("dataDir", "${TMP_DIR}/zookeeper-local")
+        zkProperties.put("dataDir", "${TMP_DIR}/zookeeper-local/${UUID.randomUUID().toString()}".toString())
         zkProperties.put("clientPort", "2181")
 
         return zkProperties

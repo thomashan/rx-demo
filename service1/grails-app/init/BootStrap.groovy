@@ -3,14 +3,17 @@ import au.com.nab.account.AccountsLoader
 import au.com.nab.infra.KafkaLocal
 
 class BootStrap {
+    private KafkaLocal kafkaLocal
+
     def init = { servletContext ->
-        new KafkaLocal()
+        kafkaLocal = new KafkaLocal()
+
         Account.withTransaction {
             AccountsLoader.load(1000)
         }
     }
 
     def destroy = {
-        Account.findAll()*.delete()
+        kafkaLocal.shutdown()
     }
 }
