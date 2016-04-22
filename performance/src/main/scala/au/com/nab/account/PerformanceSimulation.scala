@@ -8,7 +8,7 @@ import io.gatling.http.Predef._
 
 import scala.concurrent.duration._
 
-class ConstantRequestSimulation extends Simulation {
+class ConstantLoadSimulation extends Simulation {
   val reactiveListScenario = scenario("Constant load - account list")
     .exec(http("reactive")
       .get("/accounts/reactiveList")
