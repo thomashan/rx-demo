@@ -2,8 +2,6 @@ package au.com.nab.account
 
 import grails.converters.JSON
 
-import static grails.async.Promises.task
-
 class AccountsController {
     AccountService accountService
 
@@ -12,10 +10,8 @@ class AccountsController {
     }
 
     def reactiveList() {
-        task {
-            accountService.observableGetAccounts()
-                    .map({ a -> a.toJson() })
-                    .subscribe({ a -> response << "$a\n" })
-        }
+        accountService.observableGetAccounts()
+                .map({ a -> a.toJson() })
+                .subscribe({ a -> response << "$a\n" })
     }
 }
