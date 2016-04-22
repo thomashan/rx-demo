@@ -10,7 +10,7 @@
         </encoder>
     </appender>
 
-    <logger name="io.gatling" level="WARN"/>
+    <logger name="io.gatling" level="ERROR"/>
 
     <root level="info">
         <appender-ref ref="STDOUT"/>
