@@ -12,6 +12,6 @@ class AccountService {
     }
 
     Observable<Account> observableGetAccounts() {
-        Observable.from(waitAll(Account.async.list()).first())
+        Observable.from(Account.list())
     }
 }
