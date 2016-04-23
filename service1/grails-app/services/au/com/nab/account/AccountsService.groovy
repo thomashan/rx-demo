@@ -6,7 +6,7 @@ import rx.Observable
 import static grails.async.Promises.*
 
 @Transactional
-class AccountService {
+class AccountsService {
     List<Account> traditionalGetAccounts() {
         Account.list()
     }
