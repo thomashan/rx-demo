@@ -7,14 +7,14 @@ class KafkaLocal {
     private static final String TMP_DIR = System.getProperty("java.io.tmpdir")
     private KafkaServerStartable kafka
     private ZooKeeperLocal zookeeper
-    private Properties kafkaProperties
+    private Map kafkaProperties
     private Properties zkProperties
 
     KafkaLocal() {
         this(defaultKafkaProperties(), defaultZookeeperProperties())
     }
 
-    KafkaLocal(Properties kafkaProperties, Properties zkProperties) {
+    KafkaLocal(Map kafkaProperties, Properties zkProperties) {
         this.kafkaProperties = kafkaProperties
         this.zkProperties = zkProperties
 
@@ -27,18 +27,16 @@ class KafkaLocal {
         println "kafka started"
     }
 
-    private static Properties defaultKafkaProperties() {
-        Properties kafkaProperties = new Properties()
-        kafkaProperties.put("zookeeper.connect", "localhost:2181")
-        kafkaProperties.put("broker.id", "1")
-        kafkaProperties.put("log.dirs", "${TMP_DIR}/kafka-local/${UUID.randomUUID().toString()}".toString())
-
-        return kafkaProperties
+    private static Map defaultKafkaProperties() {
+        ["zookeeper.connect": "localhost:2181",
+         "broker.id"        : "1",
+         "log.dirs"         : "${TMP_DIR}kafka-local/${UUID.randomUUID().toString()}".toString()
+        ]
     }
 
     private static Properties defaultZookeeperProperties() {
         Properties zkProperties = new Properties()
-        zkProperties.put("dataDir", "${TMP_DIR}/zookeeper-local/${UUID.randomUUID().toString()}".toString())
+        zkProperties.put("dataDir", "${TMP_DIR}zookeeper-local/${UUID.randomUUID().toString()}".toString())
         zkProperties.put("clientPort", "2181")
 
         return zkProperties
