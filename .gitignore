@@ -3,3 +3,4 @@
 *.autosave
 results/
 out/
+*.iml
