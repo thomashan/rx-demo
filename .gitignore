@@ -4,3 +4,5 @@
 results/
 out/
 *.iml
+*.ipr
+*.iws
