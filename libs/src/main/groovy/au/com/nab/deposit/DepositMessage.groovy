@@ -1,6 +1,7 @@
 package au.com.nab.deposit
 
 import au.com.nab.message.Message
+import groovy.json.JsonBuilder
 
 class DepositMessage implements Message {
     String accountName
@@ -8,6 +9,6 @@ class DepositMessage implements Message {
 
     @Override
     String message() {
-        return "messageType:$messageType,verion:$version,from:$from,to:$to,$body:body,accountName:$accountName,amount:$amount"
+        return new JsonBuilder(this).toString()
     }
 }
