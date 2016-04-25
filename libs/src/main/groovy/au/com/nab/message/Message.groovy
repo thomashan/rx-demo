@@ -7,7 +7,7 @@ class Message {
     String version
     String from
     String to
-    Map<String, String> body
+    Map<String, Object> body
 
     String message() {
         return new JsonBuilder(this).toString()
