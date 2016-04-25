@@ -2,7 +2,8 @@ package au.com.nab.account
 
 import au.com.nab.message.Message
 import com.cj.kafka.rx.Record
-import groovyx.net.http.RESTClient
+import groovyx.net.http.AsyncHTTPBuilder
+import groovyx.net.http.HTTPBuilder
 import org.apache.kafka.clients.producer.KafkaProducer
 import org.apache.kafka.clients.producer.Producer
 import rx.Observable
@@ -16,13 +17,14 @@ import static org.apache.kafka.clients.producer.ProducerConfig.VALUE_SERIALIZER_
 class AccountService {
     private static final String TOPIC = "service2"
     private static final String SERIALISER = "org.apache.kafka.common.serialization.StringSerializer"
-    private RESTClient restClient = createHttpClient()
+    private HTTPBuilder httpClient = createHttpClient()
     private Producer producer = createProducer()
 
-    void traditionalDeposit(String accountNumber, BigDecimal amount) {
-        restClient.post(
-                path: "/account/$accountNumber/deposit",
-                requestContentType: JSON
+    void traditionalDeposit(long accountId, BigDecimal amount) {
+        httpClient.post(
+                path: "/deposit/$accountId",
+                requestContentType: JSON,
+                body: ["amount": amount]
         )
     }
 
@@ -32,8 +34,8 @@ class AccountService {
                 .forEach({ record -> saveToKafka(record, producer).forEach({ Record r -> r.commit() }) })
     }
 
-    private RESTClient createHttpClient() {
-        new RESTClient("http://localhost:8081")
+    private AsyncHTTPBuilder createHttpClient() {
+        new AsyncHTTPBuilder(uri: "http://localhost:8081", timeout: 3000)
     }
 
     private Producer createProducer() {

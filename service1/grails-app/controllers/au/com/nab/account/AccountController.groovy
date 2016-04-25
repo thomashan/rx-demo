@@ -5,18 +5,18 @@ import au.com.nab.message.MessageType
 import rx.Observable
 
 class AccountController {
-    static allowedMethods = [traditionalDeposit: ' POST',
-                             reactiveDeposit   : 'POST']
     AccountService accountService
 
     def traditionalDeposit() {
-        accountService.traditionalDeposit($accountNumber, 1)
+        100000.times {
+            accountService.traditionalDeposit(params.long("id"), 1)
+        }
 
         render(status: 200)
     }
 
     def reactiveDeposit() {
-        Observable<Message> depositMessages = createDepositMessages(10000)
+        Observable<Message> depositMessages = createDepositMessages(100000)
 
         accountService.reactiveDeposit(depositMessages)
 
@@ -30,7 +30,7 @@ class AccountController {
                 version: "1",
                 from: "service1-deposit",
                 to: "service2-deposit",
-                body: [id: params.long("id"), amount: 10]
+                body: [id: params.long("id"), amount: 1]
         )
 
         Observable.just(depositMessage).repeat(times)

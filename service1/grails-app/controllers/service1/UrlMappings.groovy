@@ -9,8 +9,12 @@ class UrlMappings {
             }
         }
 
-        "/account/$id/traditionalDeposit"(controller: "account", action: "traditionalDeposit")
-        "/account/$id/reactiveDeposit"(controller: "account", action: "reactiveDeposit")
+        "/account/$id/traditionalDeposit"(controller: "account") {
+            action = [POST: "traditionalDeposit"]
+        }
+        "/account/$id/reactiveDeposit"(controller: "account") {
+            action = [POST: "reactiveDeposit"]
+        }
 
         "/"(controller: 'application', action: 'index')
         "500"(view: '/error')

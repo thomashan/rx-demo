@@ -9,6 +9,10 @@ class UrlMappings {
             }
         }
 
+        "/deposit/$id"(controller: "deposit") {
+            action = [POST: "traditionalDeposit"]
+        }
+
         "/"(controller: 'application', action: 'index')
         "500"(view: '/error')
         "404"(view: '/notFound')

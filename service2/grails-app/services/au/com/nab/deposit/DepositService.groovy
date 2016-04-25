@@ -5,6 +5,7 @@ import au.com.nab.message.Message
 import au.com.nab.message.MessageType
 import com.cj.kafka.rx.Record
 import com.cj.kafka.rx.RxConsumer
+import grails.transaction.Transactional
 import groovy.json.JsonSlurper
 import kafka.serializer.StringDecoder
 
@@ -14,12 +15,18 @@ import static rx.lang.scala.JavaConversions.toJavaObservable
 
 class DepositService {
     private static final String TOPIC = "service2"
-    static lazyInit = false
+//    static lazyInit = false
     RxConsumer rxConsumer = new RxConsumer("localhost:2181", "service2-group", false, false, null)
 
-    @PostConstruct
-    void initialise() {
-        listenToDepositMessages()
+//    @PostConstruct
+//    private void initialise() {
+//        listenToDepositMessages()
+//    }
+
+    @Transactional
+    def deposit(long id, BigDecimal amount) {
+        Account account = Account.get(id)
+        account.deposit(amount)
     }
 
     def listenToDepositMessages() {
