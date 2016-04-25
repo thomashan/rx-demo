@@ -1,4 +1,4 @@
-# Run service 1
+# Run service 2
 
 ## Prerequisites
 * Java JDK 8
