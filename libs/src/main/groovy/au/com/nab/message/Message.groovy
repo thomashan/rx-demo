@@ -1,11 +1,15 @@
 package au.com.nab.message
 
-trait Message {
+import groovy.json.JsonBuilder
+
+class Message {
     MessageType messageType
     String version
     String from
     String to
-    String body
+    Map<String, String> body
 
-    abstract String message()
+    String message() {
+        return new JsonBuilder(this).toString()
+    }
 }
