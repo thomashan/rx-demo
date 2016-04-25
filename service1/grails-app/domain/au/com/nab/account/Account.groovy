@@ -1,8 +1,6 @@
 package au.com.nab.account
 
-import au.com.nab.domain.Json
-
-class Account implements Json {
+class Account {
     String name
     String accountNumber
     BigDecimal balance

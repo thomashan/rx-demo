@@ -1,6 +1,6 @@
 package au.com.nab.account
 
-import au.com.nab.deposit.DepositMessage
+import au.com.nab.message.Message
 import com.cj.kafka.rx.Record
 import groovyx.net.http.RESTClient
 import org.apache.kafka.clients.producer.KafkaProducer
@@ -14,9 +14,10 @@ import static org.apache.kafka.clients.producer.ProducerConfig.KEY_SERIALIZER_CL
 import static org.apache.kafka.clients.producer.ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG
 
 class AccountService {
+    private static final String TOPIC = "service2"
+    private static final String SERIALISER = "org.apache.kafka.common.serialization.StringSerializer"
     private RESTClient restClient = createHttpClient()
     private Producer producer = createProducer()
-    private static final String TOPIC = "service2-request"
 
     void traditionalDeposit(String accountNumber, BigDecimal amount) {
         restClient.post(
@@ -25,7 +26,7 @@ class AccountService {
         )
     }
 
-    void reactiveDeposit(Observable<DepositMessage> depositMessages) {
+    void reactiveDeposit(Observable<Message> depositMessages) {
         depositMessages
                 .map({ depositMessage -> toProducerRecord(TOPIC, depositMessage) })
                 .forEach({ record -> saveToKafka(record, producer).forEach({ Record r -> r.commit() }) })
@@ -38,8 +39,8 @@ class AccountService {
     private Producer createProducer() {
         Map<String, String> config =
                 ["bootstrap.servers"            : "localhost:9092",
-                 (KEY_SERIALIZER_CLASS_CONFIG)  : "org.apache.kafka.common.serialization.StringSerializer",
-                 (VALUE_SERIALIZER_CLASS_CONFIG): "org.apache.kafka.common.serialization.StringSerializer"
+                 (KEY_SERIALIZER_CLASS_CONFIG)  : SERIALISER,
+                 (VALUE_SERIALIZER_CLASS_CONFIG): SERIALISER
                 ]
 
         new KafkaProducer(config)
