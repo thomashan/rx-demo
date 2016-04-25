@@ -46,7 +46,7 @@ class KafkaLocal {
     void shutdown() {
         //stop kafka broker
         kafka.shutdown()
-        new File(kafkaProperties.getProperty("log.dirs")).deleteDir()
+        new File(kafkaProperties.get("log.dirs")).deleteDir()
         new File(zkProperties.getProperty("dataDir")).deleteDir()
         println "stopped kafka"
         zookeeper.shutdown()
