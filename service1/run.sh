@@ -3,4 +3,5 @@
 echo "Installing libs"
 (cd ./../libs && exec ./gradlew clean install)
 
-grails clean run-app
+grails clean
+grails run-app
