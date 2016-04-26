@@ -63,6 +63,7 @@ dependencies {
     compile "io.reactivex:rxgroovy:1.0.3"
     compile "au.com.nab:libs:0.1"
     compile "com.cj:kafka-rx_2.11:0.3.1"
+    compile "org.grails.plugins:quartz:2.0.9"
 
     console "org.grails:grails-console"
 
