@@ -63,12 +63,12 @@ class TraditionalListSpikeSimulation extends Simulation {
 class TraditionalDepositSimulation extends Simulation {
   val traditionalListScenario = scenario("Traditional deposit")
     .exec(http("traditionalDeposit")
-      .get("/account/1/traditionalDeposit")
+      .post("/account/1/traditionalDeposit")
       .check(status.is(200))
     )
 
   setUp(
     traditionalListScenario
-      .inject(atOnceUsers(10000))
+      .inject(atOnceUsers(2500))
   ).protocols(HTTP_CONF)
 }
