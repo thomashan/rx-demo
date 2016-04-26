@@ -2,8 +2,8 @@ package au.com.nab.account
 
 import au.com.nab.message.Message
 import com.cj.kafka.rx.Record
-import groovyx.net.http.AsyncHTTPBuilder
 import groovyx.net.http.HTTPBuilder
+import groovyx.net.http.RESTClient
 import org.apache.kafka.clients.producer.KafkaProducer
 import org.apache.kafka.clients.producer.Producer
 import rx.Observable
@@ -34,8 +34,8 @@ class AccountService {
                 .forEach({ record -> saveToKafka(record, producer).forEach({ Record r -> r.commit() }) })
     }
 
-    private AsyncHTTPBuilder createHttpClient() {
-        new AsyncHTTPBuilder(uri: "http://localhost:8081", timeout: 3000)
+    private RESTClient createHttpClient() {
+        new RESTClient("http://localhost:8081")
     }
 
     private Producer createProducer() {

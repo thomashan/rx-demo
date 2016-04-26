@@ -8,9 +8,7 @@ class AccountController {
     AccountService accountService
 
     def traditionalDeposit() {
-        100000.times {
-            accountService.traditionalDeposit(params.long("id"), 1)
-        }
+        accountService.traditionalDeposit(params.long("id"), 1)
 
         render(status: 200)
     }
