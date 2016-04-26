@@ -47,7 +47,6 @@ class TraditionalListSimulation extends Simulation {
   ).protocols(HTTP_CONF)
 }
 
-
 class TraditionalListSpikeSimulation extends Simulation {
   val traditionalListScenario = scenario("Traditional account list - spike load")
     .exec(http("traditionalList")
@@ -58,5 +57,18 @@ class TraditionalListSpikeSimulation extends Simulation {
   setUp(
     traditionalListScenario
       .inject(atOnceUsers(spikeUsers))
+  ).protocols(HTTP_CONF)
+}
+
+class TraditionalDepositSimulation extends Simulation {
+  val traditionalListScenario = scenario("Traditional deposit")
+    .exec(http("traditionalDeposit")
+      .get("/account/1/traditionalDeposit")
+      .check(status.is(200))
+    )
+
+  setUp(
+    traditionalListScenario
+      .inject(atOnceUsers(10000))
   ).protocols(HTTP_CONF)
 }

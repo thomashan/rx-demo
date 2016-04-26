@@ -17,3 +17,7 @@ object ReactiveListRunner extends App {
 object ReactiveListSpikeRunner extends App {
   Gatling.main(Array("-s", "au.com.nab.account.ReactiveListSpikeSimulation"))
 }
+
+object TraditionalDeposit extends App {
+  Gatling.main(Array("-s", "au.com.nab.account.TraditionalDepositSimulation"))
+}
