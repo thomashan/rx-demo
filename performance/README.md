@@ -29,3 +29,10 @@ sbt "run-main au.com.nab.account.ReactiveListSpikeRunner"
 ```
 sbt "run-main au.com.nab.account.TraditionalListSpikeRunner"
 ```
+
+---
+
+**Traditional deposit**
+```
+sbt "run-main au.com.nab.account.TraditionalDepositRunner"
+```
