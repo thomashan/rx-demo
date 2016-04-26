@@ -1,8 +1,8 @@
-import service2.ReactiveDepositRunner
+import service2.ReactiveDepositJob
 
 class BootStrap {
     def init = { servletContext ->
-        ReactiveDepositRunner.triggerNow()
+        ReactiveDepositJob.triggerNow()
     }
     def destroy = {
     }

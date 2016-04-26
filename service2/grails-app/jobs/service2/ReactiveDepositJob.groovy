@@ -5,12 +5,13 @@ import au.com.nab.message.Message
 import au.com.nab.message.MessageType
 import com.cj.kafka.rx.Record
 import com.cj.kafka.rx.RxConsumer
+import grails.plugins.quartz.QuartzJob
 import groovy.json.JsonSlurper
 import kafka.serializer.StringDecoder
 
 import static rx.lang.scala.JavaConversions.toJavaObservable
 
-class ReactiveDepositRunner {
+class ReactiveDepositJob implements QuartzJob {
     private static final String TOPIC = "service2"
 
     void execute() {
