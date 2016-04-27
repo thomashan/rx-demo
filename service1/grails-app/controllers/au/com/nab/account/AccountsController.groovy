@@ -11,7 +11,7 @@ class AccountsController {
 
     def reactiveList() {
         accountsService.observableGetAccounts()
-                .map({ a -> a.toJson() })
+                .map({ a -> a as JSON })
                 .subscribe({ a -> response << "$a\n" })
     }
 }
