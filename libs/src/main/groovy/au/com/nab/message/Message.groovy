@@ -10,6 +10,6 @@ class Message {
     Map<String, Object> body
 
     String message() {
-        new JsonBuilder(this).toString()
+        return new JsonBuilder(this).toString()
     }
 }
