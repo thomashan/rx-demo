@@ -42,11 +42,9 @@
     <!-- Any section element inside of this container is displayed as a slide -->
     <div class="slides">
         <section>
-            <h1>Basic Intro to Reactive Programming and Reactive Extensions (RX)</h1>
-            <h3>(not so basic also included)</h3>
+            <h1>Reactive Microservices</h1>
             <p>
-                <small>Thomas Han - Lead Software Engineer @ Odecee (some links might be out of date by the time you
-                    read this)
+                <small>Thomas Han - Lead Software Engineer @ Odecee
                 </small>
             </p>
         </section>
@@ -193,9 +191,18 @@
                     <p>Service Engine &cong; Microservice</p>
                     <p>Service Engine at NAB is most likely to be an architect's interpretation of microservice.</p>
                 </span>
+                <p class="fragment">Service engines use some reactive components (e.g. hystrix) but remember an
+                    application has to be reactive from top to bottom.</p>
+                <p class="fragment">The mindset and architecture not the framework or tech stack is the most important
+                    thing in achieving truly reactive applications.</p>
             </section>
             <section>
                 <h2>Let's make Service Engines more reactive</h2>
+                <ol>
+                    <li>Add more resilience</li>
+                    <li>Replace ESB with dumb pipe</li>
+                    <li>Break request/response mindset and use messaging</li>
+                </ol>
             </section>
         </section>
         <section>
@@ -239,30 +246,105 @@
             </section>
         </section>
         <section>
+            <section><h2>Replace ESB with dumb pipes</h2></section>
+            <section>
+                <h2>Why?</h2>
+                <ul>
+                    <li class="fragment">Contains complex routing - increases latency moderately</li>
+                    <li class="fragment">Contains business logic - increases latency considerably</li>
+                </ul>
+                <p class="fragment">Low latency is king in the reactive land</p>
+            </section>
+            <section>
+                <h2>What should we be doing?</h2>
+                <p>Distribute the smarts to the microservices</p>
+                <p>The microservice should know how to:</p>
+                <ul>
+                    <li class="fragment">pick up the message (event/stream)</li>
+                    <li class="fragment">process the message (event/stream)</li>
+                    <li class="fragment">respond to the message (event/stream)</li>
+                </ul>
+            </section>
+        </section>
+        <section>
+            <section><h2>Break request/response mindset and use messaging</h2></section>
+            <section>
+                <h2>Not everything has to be request/response</h2>
+                <p class="fragment">Currently all inter-service communication is done through HTTP(S)</p>
+                <ul>
+                    <li class="fragment">Making HTTP requests (especially HTTPS) is order of magnitudes more expensive
+                        than pushing messages to a dumb messaging bus.
+                        <a href="https://engineering.linkedin.com/kafka/benchmarking-apache-kafka-2-million-writes-second-three-cheap-machines"
+                           target="_blank">(Kafka can write 2 million message per second with three nodes)</a></li>
+                    <li class="fragment">The microservice making the request is tightly coupled to the responding
+                        microservice. It expects the response to come back in the same HTTP connection.
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <h2>Not everything has to be request/response</h2>
+                <ul>
+                    <li class="fragment">It doesn't matter who created the responses. It just has to be a response.</li>
+                    <li class="fragment">HTTP(S) over TCP is just a transportation protocol in which the response can
+                        come back in.
+                    </li>
+                    <li class="fragment">Some operations don't require responses to be returned in timely manner.</li>
+                    <li class="fragment">Makes testing hard if the responding microservice is not available.</li>
+                </ul>
+            </section>
+            <section>
+                <h2>What are the alternatives to request/response interaction style?</h2>
+                <p>Nginx has a very comprehensive <a
+                        href="https://www.nginx.com/blog/building-microservices-inter-process-communication/">blog</a>
+                    outlining the interaction styles.</p>
+                <p>Although using REST for request/response is good for exposing APIs to clients, it's not the best
+                    style for inter-service communication.</p>
+                <p>In fact they only use request/response once at the initialisaton phase and everything else is
+                    publish/subscribe or notification style interactions.</p>
+            </section>
+            <section data-background="images/Richardson-microservices-part3-taxi-service.png">
+            </section>
+        </section>
+        <section>
+            <section>
+                <h2>So are the other companies doing this right?</h2>
+            </section>
             <section>
                 <h2>Very few companies are doing (reactive microservices) it right.</h2>
                 <p class="fragment">Can you guess which ones?</p>
                 <p class="fragment">Netflix</p>
             </section>
+        </section>
+        <section>
+            <h2>Demo</h2>
+        </section>
+
+        <section>
             <section>
-                <h2>The things NAB can improve on</h2>
-                <p class="fragment">Get rid of ESB. The message queues should be dumb e.g. no logic for routing. The
-                    smarts should be in the microservices.</p>
-                <p class="fragment">Get rid of the mindset that Services = APIs. HTTP(s) over TCP is just a
-                    transportation protocols. Services do not have to exposed through HTTP(s) all the time. (more on
-                    this in the demo)</p>
-                <p class="fragment"><span style="color: red">*</span> Use resilient message buses (more on this in the demo)</p>
+                <p class="fragment">NAB has has taken the journey to convert from monolith to microservices</p>
+                <p class="fragment">Why not go all the way and take the journey to convert to reactive microservice?</p>
+            </section>
+            <section data-background="images/{6B359BC1-93B0-430A-ABAC-4AEF829D10E1}.JPG">
+                <h2>Monolith</h2>
+            </section>
+            <section data-background="images/luxury-house-eternohome-luxury-house-photos-luxury-house-photos.jpg">
+                <h2>Microservice</h2>
+            </section>
+            <section data-background="images/new_house_old_oven.jpg">
+                <h2>Microservice</h2>
+            </section>
+            <section data-background="images/luxury-modern-kitchen.jpg">
+                <h2>Reactive Microservice</h2>
             </section>
         </section>
 
         <section>
             <ul>
-                <li>Difference between ESB</li>
-                <li>Architecture is more important than any framework</li>
-                <li>Microservice is not HTTP endpoint. HTTP over TCP is just a transportation layer.</li>
+                <li>Analogy of moving house from normal to luxury with old appliance</li>
                 <li>My interpretation of microservice</li>
                 <li>Resilience using a publish/consume message bus.</li>
                 <li>Do we know how to do this? Hell yeah, but only in parts.</li>
+                <li>Quote: It's all common sense to me</li>
             </ul>
         </section>
 
