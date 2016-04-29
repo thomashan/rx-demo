@@ -119,14 +119,15 @@
                     <li>Elastic</li>
                     <li>Message Driven</li>
                 </ul>
-                <img data-src="http://www.reactivemanifesto.org/images/reactive-traits.svg">
+                <img data-src="images/reactive-traits.svg">
             </section>
             <section>
                 <h2>Why reactive?</h2>
                 <p>It turns out many companies working on different domains were independently discovering patterns for
                     building software that look the same. Reactive!</p>
                 <p>Reactive programming provides a higher abstraction than imperative or declarative programming,
-                    ultimately increasing productivity by magnitudes in domains where RX exceled at.</p>
+                    ultimately increasing productivity in domains where RX excelled at (in some cases by order of
+                    magnitudes).</p>
                 <p>Analogy: productivity gained by employing java over assembly as a general programming language.</p>
             </section>
             <section>
@@ -197,6 +198,7 @@
                     <li>Add more resilience</li>
                     <li>Replace ESB with dumb pipe</li>
                     <li>Break request/response mindset and use messaging</li>
+                    <li>Other use cases</li>
                 </ol>
             </section>
         </section>
@@ -204,12 +206,12 @@
             <section>
                 <h2>Add more resilience</h2>
             </section>
-            <section data-background="images/resilence-all.png" data-background-size="1300px">
+            <section data-background="images/resilence-all.png" data-background-size="70%">
             </section>
             <section>
                 <h2>1% chance of any node going down independently</h2>
             </section>
-            <section data-background="images/resilence-outage.png" data-background-size="1300px">
+            <section data-background="images/resilence-outage.png" data-background-size="70%">
                 <h2>99%</h2>
             </section>
             <section>
@@ -217,7 +219,7 @@
                 <p class="fragment">Or the uptime will be 99%</p>
                 <p class="fragment">Now lets divide the end points so they fail independently</p>
             </section>
-            <section data-background="images/resilence-outage-independent.png" data-background-size="1300px">
+            <section data-background="images/resilence-outage-independent.png" data-background-size="70%">
                 <h2>99.9999%</h2>
             </section>
             <section>
@@ -279,7 +281,9 @@
             <section>
                 <h2>Not everything has to be request/response</h2>
                 <ul>
-                    <li class="fragment">It doesn't matter who created the responses. It just has to be a response.</li>
+                    <li class="fragment">It doesn't matter who created the responses. The client just has to pick up the
+                        response somehow.
+                    </li>
                     <li class="fragment">HTTP(S) over TCP is just a transportation protocol in which the response can
                         come back in.
                     </li>
@@ -289,7 +293,7 @@
             </section>
             <section>
                 <h2>What are the alternatives to request/response interaction style?</h2>
-                <p>Nginx has a very comprehensive <a
+                <p>nginx has a very comprehensive <a
                         href="https://www.nginx.com/blog/building-microservices-inter-process-communication/">blog</a>
                     outlining the interaction styles.</p>
                 <p>Although using REST for request/response is good for exposing APIs to clients, it's not the best
@@ -297,7 +301,56 @@
                 <p>In fact they only use request/response once at the initialisaton phase and everything else is
                     publish/subscribe or notification style interactions.</p>
             </section>
-            <section data-background="images/Richardson-microservices-part3-taxi-service.png">
+            <section data-background="images/Richardson-microservices-part3-taxi-service.png"
+                     data-background-size="70%">
+            </section>
+        </section>
+        <section>
+            <section><h2>Other use cases</h2></section>
+            <section>
+                <h2>Throttling - Managing backpressure</h2>
+                <p>RX has built-in <a href="http://reactivex.io/documentation/operators/backpressure.html"
+                                      target="_blank">throttling controls</a> or backpressure in reactive terminology.
+                </p>
+            </section>
+            <section data-background="images/throttle.png" data-background-size="60%">
+                <p>Each microservice has config for throttling.</p>
+            </section>
+            <section data-background="images/throttle.png" data-background-size="60%">
+                <p>This is not going to work if you want dynamic scaling.</p>
+            </section>
+            <section data-background="images/throttle_blowup.png" data-background-size="50%">
+                <p><strong>Kaboom!!</strong></p>
+            </section>
+            <section>
+                <p>We need a better way to handle backpressure.</p>
+            </section>
+            <section data-background="images/throttle_reactive.png" data-background-size="90%">
+            </section>
+            <section>
+                <h2>Backpressure</h2>
+                <p><a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/gettingstarted/backpressure.md"
+                      target="_blank">There are two ways of handling backpressure</a></p>
+                <ul>
+                    <li>loseless - where messages are not dropped (increases memory consumption)</li>
+                    <li>lossy - where messages are dropped</li>
+                </ul>
+            </section>
+            <section>
+                <p>Lossless backpressure operators</p>
+                <ul>
+                    <li>observable.buffer() - by time or count</li>
+                    <li>observable.window() - by time or count</li>
+                    <li>observable.pausableBuffered() - buffers messages between pause and resume</li>
+                    <li>observable.controlled() - process number of messages for a time interval</li>
+                </ul>
+                <p>Lossy backpressure operators</p>
+                <ul>
+                    <li>observable.debounce() - process next message only after certain time</li>
+                    <li>observable.throttle() - drop everything after throttle has been reached</li>
+                    <li>observable.sample() - process next message at intervals</li>
+                    <li>observable.pausable() - drops message between pause and resume</li>
+                </ul>
             </section>
         </section>
         <section>
@@ -316,6 +369,7 @@
                 <span style="margin: 20px;"><img src="images/grails-logo-sm.png"></span>
                 <span style="margin: 20px;"><img src="images/Gatling_(load_testing_tool)_Logo.png"></span>
                 <span style="margin: 20px;"><img src="images/springboot.png"></span>
+                <span style="margin: 20px;"><img src="images/images.png"></span>
                 <span style="margin: 20px;"><img src="images/200px-Groovy-logo.svg.png"></span>
                 <span style="margin: 20px;"><img src="images/scala-logo1.png"></span>
                 <span style="margin: 20px;"><img src="images/Reactive-Extensions.png"></span>
@@ -327,7 +381,7 @@
                 <p>NAB has has taken the journey to convert from monolith to microservices</p>
                 <p class="fragment">Why not go all the way and take the journey to convert to reactive microservice?</p>
             </section>
-            <section data-background="images/{6B359BC1-93B0-430A-ABAC-4AEF829D10E1}.JPG">
+            <section data-background="images/Old-House_4-11_600.jpg">
                 <h2>Monolith</h2>
             </section>
             <section data-background="images/luxury-house-eternohome-luxury-house-photos-luxury-house-photos.jpg">
@@ -343,7 +397,7 @@
 
         <section>
             <h2>Thank you!</h2>
-            <blockquote class="fragment">It's all common sense to me.<br />-Anonymous-</blockquote>
+            <blockquote class="fragment">It's all common sense to me.<br/>-Anonymous-</blockquote>
         </section>
         <section>
             <h2>Questions?</h2>
