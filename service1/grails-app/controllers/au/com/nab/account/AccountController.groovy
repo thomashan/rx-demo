@@ -14,7 +14,7 @@ class AccountController {
     }
 
     def reactiveDeposit() {
-        Observable<Message> depositMessages = createDepositMessages(100000)
+        Observable<Message> depositMessages = createDepositMessages(2500)
 
         accountService.reactiveDeposit(depositMessages)
 
