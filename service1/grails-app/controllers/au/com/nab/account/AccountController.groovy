@@ -8,9 +8,9 @@ class AccountController {
     AccountService accountService
 
     def traditionalDeposit() {
-        accountService.traditionalDeposit(params.long("id"), 1)
+        int statusCode = accountService.traditionalDeposit(params.long("id"), 1)
 
-        render(status: 200)
+        render(status: statusCode)
     }
 
     def reactiveDeposit() {
@@ -22,7 +22,6 @@ class AccountController {
     }
 
     private Observable<Message> createDepositMessages(int times) {
-        def id = params.id
         Message depositMessage = new Message(
                 messageType: MessageType.REQUEST,
                 version: "1",

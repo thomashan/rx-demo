@@ -6,7 +6,7 @@ import grails.transaction.Transactional
 class DepositService {
     @Transactional
     def deposit(long id, BigDecimal amount) {
-        Account account = Account.findById(id, [lock: true])
+        Account account = Account.get(id)
         account.deposit(amount)
     }
 }

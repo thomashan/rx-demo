@@ -54,8 +54,6 @@ grails:
     spring:
         transactionManagement:
             proxies: false
-    servlet:
-        version: 3.0
 info:
     app:
         name: '@info.app.name@'

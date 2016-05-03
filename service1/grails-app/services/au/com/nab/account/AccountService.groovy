@@ -4,6 +4,7 @@ import au.com.nab.message.Message
 import com.cj.kafka.rx.Record
 import groovyx.net.http.HTTPBuilder
 import groovyx.net.http.RESTClient
+import org.apache.http.HttpResponse
 import org.apache.kafka.clients.producer.KafkaProducer
 import org.apache.kafka.clients.producer.Producer
 import rx.Observable
@@ -17,15 +18,15 @@ import static org.apache.kafka.clients.producer.ProducerConfig.VALUE_SERIALIZER_
 class AccountService {
     private static final String TOPIC = "service2"
     private static final String SERIALISER = "org.apache.kafka.common.serialization.StringSerializer"
-    private HTTPBuilder httpClient = createHttpClient()
     private Producer producer = createProducer()
 
-    void traditionalDeposit(long accountId, BigDecimal amount) {
-        httpClient.post(
+    int traditionalDeposit(long accountId, BigDecimal amount) {
+        createHttpClient().post(
                 path: "/deposit/$accountId",
                 requestContentType: JSON,
-                body: ["amount": amount]
-        )
+                body: ["amount": amount]) { HttpResponse response ->
+            return response.statusLine.statusCode
+        }
     }
 
     void reactiveDeposit(Observable<Message> depositMessages) {

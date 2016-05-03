@@ -29,7 +29,7 @@ class ReactiveDepositJob implements QuartzJob {
                 .forEach({ message ->
                     long id = message.body.id
                     BigDecimal amount = message.body.amount
-                    Account account = Account.findById(id, [lock: true])
+                    Account account = Account.get(id)
 
                     Account.withTransaction {
                         account.deposit(amount)
