@@ -418,6 +418,66 @@
                 <span style="margin: 20px;"><img src="images/scala-logo1.png"></span>
                 <span style="margin: 20px;"><img src="images/Reactive-Extensions.png"></span>
             </section>
+            <section data-background="images/demo-traditional.png" data-background-size="25%">
+                <h2>Architecture - Traditional</h2>
+            </section>
+            <section data-background="images/demo-reactive.png" data-background-size="25%">
+                <h2>Architecture - Reactive</h2>
+                <p>
+                    <br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                </p>
+            </section>
+            <section>
+                <h2>Run services</h2>
+                <pre>
+                     <code>
+                         > ./run.sh
+                     </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Service2 - Dead</h2>
+                <p>Traditional - All requests to service1 will fail and be lost</p>
+                <p>Reactive - All requests will be queued up in the message bus. Service2 will pick up the message and
+                    process the messages once it's up.</p>
+                <p>Service2 doesn't need to be running at the same time as service1 to process the message
+                    successfully.</p>
+            </section>
+            <section>
+                <h2>Traditional - 2500 requests</h2>
+                <pre>
+                    <code>
+                        performance> ./hit_it.sh
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Reactive - 2500 message</h2>
+                <pre>
+                    <code>
+                        service1> ./hit_it.sh
+                        service2> ./run.sh
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Performance - processing 2500 requests</h2>
+                <p>All services up and running</p>
+                <ul>
+                    <li>Traditional (60s and some may fail)<br/>
+                        <code>
+                            performance> ./hit_it.sh
+                        </code>
+                    </li>
+                    <li>Reactive (&sime;3s and none failed)<br/>
+                        <code>
+                            service1> ./hit_it.sh
+                        </code>
+                    </li>
+                </ul>
+
+            </section>
+
         </section>
 
         <section>
