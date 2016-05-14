@@ -1,6 +1,6 @@
-import au.com.nab.account.Account
-import au.com.nab.account.AccountsLoader
-import au.com.nab.infra.KafkaLocal
+import au.com.thomashan.account.Account
+import au.com.thomashan.account.AccountsLoader
+import au.com.thomashan.infra.KafkaLocal
 
 class BootStrap {
     private KafkaLocal kafkaLocal

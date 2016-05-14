@@ -1,4 +1,4 @@
 #!/bin/sh
 
-sbt "run-main au.com.nab.account.TraditionalDepositRunner"
+sbt "run-main au.com.thomashan.account.TraditionalDepositRunner"
 

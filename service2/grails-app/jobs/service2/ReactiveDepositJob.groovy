@@ -1,8 +1,8 @@
 package service2
 
-import au.com.nab.account.Account
-import au.com.nab.message.Message
-import au.com.nab.message.MessageType
+import au.com.thomashan.account.Account
+import au.com.thomashan.message.Message
+import au.com.thomashan.message.MessageType
 import com.cj.kafka.rx.Record
 import com.cj.kafka.rx.RxConsumer
 import grails.plugins.quartz.QuartzJob
